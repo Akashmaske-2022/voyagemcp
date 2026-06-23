@@ -19,13 +19,18 @@ function requireApiKey(req, res, next) {
   const authHeader = req.headers['authorization'] || '';
   const match = authHeader.match(/^Bearer\s+(.+)$/i);
 
-  if (!match) {
-    return res.status(401).json({
-      error: 'Missing or malformed Authorization header. Expected: Bearer <token>',
-    });
+  let providedKey = null;
+  if (match) {
+    providedKey = match[1];
+  } else if (req.query && req.query.apiKey) {
+    providedKey = req.query.apiKey;
   }
 
-  const providedKey = match[1];
+  if (!providedKey) {
+    return res.status(401).json({
+      error: 'Missing or malformed Authorization header or apiKey query parameter.',
+    });
+  }
 
   // Constant-time comparison to prevent timing attacks
   if (!timingSafeEqual(providedKey, MCP_API_KEY)) {
