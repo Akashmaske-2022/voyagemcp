@@ -22,8 +22,8 @@ function requireApiKey(req, res, next) {
   let providedKey = null;
   if (match) {
     providedKey = match[1];
-  } else if (req.query && req.query.apiKey) {
-    providedKey = req.query.apiKey;
+  } else if (req.query) {
+    providedKey = req.query.apiKey || req.query.apikey;
   }
 
   if (!providedKey) {
