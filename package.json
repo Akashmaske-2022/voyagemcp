@@ -1,0 +1,29 @@
+{
+  "name": "voyage-mcp-server",
+  "version": "1.0.0",
+  "description": "VibeVoyage AI — MCP (Model Context Protocol) server for admin monitoring and analytics",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "inspect": "npx @modelcontextprotocol/inspector http://localhost:3001/mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.0",
+    "@supabase/supabase-js": "^2.108.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "undici": "^5.29.0",
+    "ws": "^8.21.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
